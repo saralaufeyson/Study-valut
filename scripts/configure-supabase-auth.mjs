@@ -48,7 +48,11 @@ export function configureAuth() {
       ...redirects,
       'http://localhost:5173/settings',
       'http://127.0.0.1:5173/settings',
-      ...(appOrigin ? [`${appOrigin}/settings`] : []),
+      'http://localhost:5173/reset-password',
+      'http://127.0.0.1:5173/reset-password',
+      ...(appOrigin
+        ? [`${appOrigin}/settings`, `${appOrigin}/reset-password`]
+        : []),
     ]),
   ]
   fs.writeFileSync(
@@ -81,7 +85,7 @@ export function configureAuth() {
   if (changes.length)
     cli(['config', 'push', target(), '--yes'], { cwd: authRoot })
   console.log(
-    'Email Magic Link configuration is ready. Existing redirect URLs and unrelated project settings were preserved.',
+    'Email verification, password login, and password recovery configuration is ready. Existing redirect URLs and unrelated project settings were preserved.',
   )
   return { changed: changes.length, siteUrl, callbackUrls }
 }

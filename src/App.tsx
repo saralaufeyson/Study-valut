@@ -24,6 +24,7 @@ import { Dashboard, SubjectsPage, SubjectPage } from './pages/Library'
 import { StudyPage } from './pages/Study'
 import { SettingsPage } from './pages/Settings'
 import { PWAUpdate } from './components/PWAUpdate'
+import { PasswordResetPage } from './components/Account'
 
 interface InstallEvent extends Event {
   prompt: () => Promise<void>
@@ -119,7 +120,8 @@ function Shell() {
   const pageName =
     location.pathname === '/'
       ? 'Overview'
-      : location.pathname.startsWith('/settings')
+      : location.pathname.startsWith('/settings') ||
+          location.pathname === '/reset-password'
         ? 'Settings'
         : isStudy
           ? 'Study mode'
@@ -344,6 +346,7 @@ function Shell() {
           />
           <Route path="/study/:lessonId" element={<StudyPage />} />
           <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/reset-password" element={<PasswordResetPage />} />
           <Route
             path="*"
             element={

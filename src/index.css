@@ -1572,6 +1572,50 @@ legend {
 .signin-form .button {
   justify-self: start;
 }
+.auth-tabs,
+.auth-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+}
+.auth-links {
+  margin-bottom: 8px;
+}
+.text-button {
+  border: 0;
+  background: none;
+  color: var(--green);
+  padding: 7px 0;
+  font: inherit;
+  font-size: 12px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.text-button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+.password-input {
+  position: relative;
+  display: block;
+}
+.password-input input {
+  width: 100%;
+  padding-right: 45px;
+}
+.password-input .icon-button {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.signin-form .success-message,
+.signin-form .form-error {
+  margin: 0;
+}
 .settings-buttons {
   display: flex;
   flex-wrap: wrap;

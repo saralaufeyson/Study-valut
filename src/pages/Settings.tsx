@@ -1,24 +1,19 @@
 import { useRef, useState } from 'react'
-import type { FormEvent } from 'react'
 import {
-  Check,
-  Cloud,
-  CloudOff,
   Download,
   ExternalLink,
   HardDrive,
-  Mail,
   RefreshCw,
   ShieldCheck,
   Upload,
 } from 'lucide-react'
 import { useVault } from '../lib/store'
-import { supabase } from '../lib/supabase'
 import { downloadBackup, makeBackup, parseBackup } from '../lib/backup'
 import type { Backup } from '../lib/backup'
 import { transact } from '../lib/database'
 import { Modal } from '../components/Editor'
 import { GateStarter } from '../components/GateStarter'
+import { AccountCard } from '../components/Account'
 
 export function SettingsPage() {
   const {
@@ -33,36 +28,10 @@ export function SettingsPage() {
     run,
     importData,
   } = useVault()
-  const [email, setEmail] = useState('')
   const [busy, setBusy] = useState(false)
-  const [authMessage, setAuthMessage] = useState('')
-  const [authError, setAuthError] = useState('')
   const [staged, setStaged] = useState<Backup | null>(null)
   const fileInput = useRef<HTMLInputElement>(null)
   const conflicts = Object.values(workspace.pending).filter((p) => p.conflict)
-  async function signIn(event: FormEvent) {
-    event.preventDefault()
-    if (!supabase) return
-    setBusy(true)
-    setAuthMessage('')
-    setAuthError('')
-    try {
-      const { error } = await supabase.auth.signInWithOtp({
-        email: email.trim(),
-        options: { emailRedirectTo: `${location.origin}/settings` },
-      })
-      if (error) throw error
-      setAuthMessage(
-        'Check your inbox. Your sign-in link is on its way. Open it on this device to connect your library.',
-      )
-    } catch (e) {
-      setAuthError(
-        e instanceof Error ? e.message : 'The sign-in link could not be sent.',
-      )
-    } finally {
-      setBusy(false)
-    }
-  }
   async function selectFile(file?: File) {
     if (!file) return
     if (file.size > 10_000_000) {
@@ -90,98 +59,7 @@ export function SettingsPage() {
           </p>
         </div>
       </div>
-      <section className="settings-card">
-        <div className="settings-icon sage">
-          <Cloud size={23} />
-        </div>
-        <div className="settings-card-content">
-          <h2>{user ? 'Your account' : 'Learn here. Continue anywhere.'}</h2>
-          <p>
-            {user
-              ? `Signed in as ${user.email}. Use the same email on your other devices.`
-              : 'Sign in with your email to keep both laptops and your phone on the same page. No password to remember.'}
-          </p>
-          {!supabase ? (
-            <div className="setup-notice">
-              <CloudOff size={19} />
-              <div>
-                <strong>Cloud sync is ready to connect.</strong>
-                <p>
-                  Your library is saved in this browser. Connect a Supabase
-                  project using the setup steps in the project README to enable
-                  email sign-in and device sync.
-                </p>
-              </div>
-            </div>
-          ) : !user ? (
-            <form
-              className="signin-form"
-              onSubmit={(e) => {
-                void signIn(e)
-              }}
-            >
-              <label>
-                Email address
-                <input
-                  type="email"
-                  autoComplete="email"
-                  required
-                  placeholder="you@example.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </label>
-              <button
-                className="button button-primary"
-                disabled={busy || !online}
-              >
-                <Mail size={16} />
-                {busy ? 'Sending…' : 'Email me a sign-in link'}
-              </button>
-              <span className="field-hint">
-                Your account library is kept separate from this browser’s local
-                library. You can copy your local library after signing in.
-              </span>
-            </form>
-          ) : (
-            <div className="account-actions">
-              <span className="privacy-note">
-                <ShieldCheck size={16} />
-                Your learning data is private to your account.
-              </span>
-              <button
-                className="button button-secondary"
-                onClick={() =>
-                  run(
-                    (async () => {
-                      const { error } = await supabase!.auth.signOut({
-                        scope: 'local',
-                      })
-                      if (error) throw error
-                      notify(
-                        'Signed out on this device. Your account library remains cached for your next sign-in.',
-                      )
-                    })(),
-                  )
-                }
-              >
-                Sign out on this device
-              </button>
-            </div>
-          )}
-          {authMessage && (
-            <p className="success-message" role="status">
-              <Check size={16} />
-              {authMessage}
-            </p>
-          )}
-          {authError && (
-            <p className="form-error" role="alert">
-              {authError}
-            </p>
-          )}
-        </div>
-      </section>
+      <AccountCard />
       <section className="settings-card">
         <div className="settings-icon blue">
           <RefreshCw size={23} />

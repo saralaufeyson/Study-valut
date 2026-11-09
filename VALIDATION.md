@@ -1,12 +1,30 @@
 # StudyVault verification — November 7, 2026
 
+## Signup verification and password login — November 9, 2026
+
+- Added separate Log in and Sign up forms. Signup collects a password and sends the Supabase confirmation link to /settings; future logins use signInWithPassword and send no login email.
+- Added confirmation resend, explicit email cooldown, useful rate-limit/verification/credential errors, password visibility controls, and password validation. Email sending limits do not disable the password login form.
+- Added Set or change password for existing signed-in Magic Link accounts and a dedicated /reset-password page for forgotten passwords. Password updates preserve the account ID and existing learning library. Expired callback errors cannot display the update form even if a previous session is cached.
+- Applied and verified /reset-password callbacks for https://studyvalut-kappa.vercel.app, http://localhost:5173, and http://127.0.0.1:5173. Existing redirects and email confirmation were preserved. No database migrations, user password changes, or learning-record changes were needed.
+- TypeScript, lint, all 68 tests across 8 files, real client initialization, and the production/PWA build passed. Nine new tests exercise the actual Supabase SDK with mocked HTTP, including password-only login, password whitespace, signup verification, recovery, resend, authenticated password updates, rate limits, and callback validation.
+- Playwright passed signup verification callbacks, mismatch/credential handling, password-only login, existing account password setup, preserved library/reload behavior, sign-out, recovery callbacks, expired links, mobile layout, and no uncaught errors. No password appeared in learning records or local storage. Supabase HTTP was mocked; no real email or real account mutation was performed by the browser test. Screenshot: artifacts/password-signup-mobile.png.
+- A live password-endpoint probe correctly rejected a randomly generated nonexistent test account with invalid_credentials. No email was sent and no account was created. A successful real password login remains a user acceptance step after setting a private password.
+- The source and production build are ready locally. The existing Vercel site must receive this updated frontend before these controls appear there. Signup verification and password recovery still require email delivery; custom SMTP remains necessary for friends' addresses with the current built-in sender restrictions.
+## Production sign-in redirect fix — November 9, 2026
+
+- Verified that https://studyvalut-kappa.vercel.app and its /settings route return HTTP 200, use this checkout's Supabase project, and request Magic Link redirects to the browser's current origin.
+- Confirmed the cloud Site URL was still http://localhost:5173 and the deployed /settings callback was absent from the allowlist.
+- Set the cloud Site URL to https://studyvalut-kappa.vercel.app and added the exact https://studyvalut-kappa.vercel.app/settings callback. Preserved existing redirects, local development callbacks, and unrelated project settings.
+- Verified the saved remote configuration has zero differences from the declared auth settings. Saved the public production origin as STUDYVAULT_APP_URL in Git-ignored .env.local for future administration runs. No frontend change or redeployment was required, no learning records were changed, and no test email was sent.
+- Request a new sign-in email from the deployed site to exercise the corrected callback. Earlier emails can retain the old redirect URL; a fresh email sign-in has not been completed as part of this fix.
+
 ## Completed checks
 
 | Check | Result |
 | --- | --- |
 | `npm run lint` | Passed |
 | `npm run typecheck` | Passed |
-| `npm test` | 59 tests passed across 7 files |
+| `npm test` | 68 tests passed across 8 files |
 | `npm run check:supabase` | Real configured client initialized successfully |
 | `npm run supabase:setup` | Completed against the existing cloud project; rerun verified idempotent setup |
 | `npm run supabase:verify` | Live schema/security and rollback-only CRUD workflow passed |
@@ -15,7 +33,7 @@
 | Full dependency audit after tooling updates | 4 low-severity findings remain in development/build dependencies; no critical/high/moderate findings |
 | Production HTTP check at `http://127.0.0.1:4173/` | 200 |
 
-The 59 tests include actual PostgreSQL migration execution in PGlite, Row Level Security, revision conflicts, idempotent retries, parent ownership, tombstones, blocked writes under deleted parents, concurrent IndexedDB transactions, account/cache isolation, edits during in-flight synchronization, backup validation, accepted/rejected YouTube URL formats, progress, lesson resume behavior, public-key validation, and malformed cloud-response rejection. SQL unit tests now reproduce Supabase's direct default function grants and verify that the follow-up migration removes anonymous execution privileges.
+The 68 tests include actual PostgreSQL migration execution in PGlite, Row Level Security, revision conflicts, idempotent retries, parent ownership, tombstones, blocked writes under deleted parents, concurrent IndexedDB transactions, account/cache isolation, edits during in-flight synchronization, backup validation, accepted/rejected YouTube URL formats, progress, lesson resume behavior, public-key validation, and malformed cloud-response rejection. SQL unit tests now reproduce Supabase's direct default function grants and verify that the follow-up migration removes anonymous execution privileges.
 
 ## Applied cloud setup
 
@@ -31,7 +49,7 @@ The 59 tests include actual PostgreSQL migration execution in PGlite, Row Level 
 - Verified that unauthenticated API requests are denied and that all four tables have RLS enabled. The three learning tables allow authenticated owner reads and deny direct client writes; the RPC permits authenticated execution only.
 - Sent one real Magic Link to the user-authorized test address. Supabase subsequently confirmed email verification and a successful sign-in. No account address, access token, refresh token, or private learning content is included in this report.
 
-The production build passed with a non-blocking warning that its main minified JavaScript chunk exceeds 500 kB (about 168 kB gzip).
+The production build passed with a non-blocking warning that its main minified JavaScript chunk exceeds 500 kB (about 171 kB gzip).
 
 ## Browser checks
 

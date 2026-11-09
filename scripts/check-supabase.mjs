@@ -22,7 +22,10 @@ try {
     if (error) throw new Error('Session initialization failed.')
     if (
       typeof client.from !== 'function' ||
-      typeof client.auth.signInWithOtp !== 'function'
+      typeof client.auth.signInWithPassword !== 'function' ||
+      typeof client.auth.signUp !== 'function' ||
+      typeof client.auth.resetPasswordForEmail !== 'function' ||
+      typeof client.auth.updateUser !== 'function'
     )
       throw new Error('Client initialization failed.')
     console.log(
