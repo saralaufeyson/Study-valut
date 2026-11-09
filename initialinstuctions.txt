@@ -1,0 +1,193 @@
+# StudyVault — AI Agent Build Instructions
+
+## Role
+Act as a senior full-stack engineer and UI/UX designer.
+
+Build **StudyVault**, a modern, minimal, distraction-free personal learning management application.
+
+The goal is simple: organize YouTube study videos, watch them in one place, mark lessons complete, and track learning progress.
+
+This is a personal application intended for two laptops and one phone. Prioritize simplicity, speed, usability, and maintainable code.
+
+## 1. Technology Stack
+
+- Frontend: React + Vite + TypeScript
+- Styling: Tailwind CSS
+- Database: Supabase PostgreSQL
+- Authentication: Supabase Auth (email Magic Link)
+- Local storage: IndexedDB
+- Hosting: Vercel
+- Platform: Responsive Progressive Web App (PWA)
+
+Avoid unnecessary frameworks, services, and complexity.
+
+## 2. Core Features
+
+### Dashboard
+- Display all subjects with progress bars.
+- Show total lessons and completed lessons.
+- Provide a "Continue Studying" button.
+- Provide an option to add subjects.
+
+### Subject Management
+- Create, edit, and delete subjects.
+- Organize topics within subjects.
+- Display topic-wise completion progress.
+
+### Lesson Management
+- Add YouTube video URLs to topics.
+- Support standard YouTube links, Shorts links, and playlist video links where possible.
+- Allow custom video titles.
+- Allow editing, deleting, and reordering lessons.
+- Display lesson completion checkboxes.
+
+### Study Mode
+- Play YouTube videos using the official embedded player.
+- Keep the interface distraction-free.
+- Display lesson title and optional notes.
+- Provide Previous and Next navigation.
+- Allow users to mark lessons complete or incomplete.
+- Do not create video recommendation feeds or browsing features.
+- Handle videos that cannot be embedded gracefully.
+
+### Progress Tracking
+- Automatically calculate completion percentages.
+- Show progress at topic and subject levels.
+- Resume from the last unfinished lesson.
+- Synchronize progress across devices.
+
+### Data Management
+- Store learning data in Supabase.
+- Use IndexedDB for local caching and offline edits.
+- Sync local changes when connectivity returns.
+- Prevent accidental overwrites during cross-device synchronization.
+- Allow importing and exporting data as JSON.
+
+### Authentication
+- Simple email-based authentication.
+- Private learning data protected with Supabase Row Level Security.
+- Never expose privileged database credentials in frontend code.
+
+## 3. UI/UX Requirements
+
+Design a sleek, minimal, modern application.
+
+Design principles:
+- Clean layouts with generous spacing.
+- Modern typography and subtle animations.
+- Beautiful but restrained progress indicators.
+- Light and dark themes.
+- Fully responsive on laptops, tablets, and phones.
+- Fast navigation without unnecessary loading.
+- Accessible controls and meaningful empty states.
+
+The application should feel polished, not like a generic admin dashboard.
+
+Prioritize the Study Mode experience above everything else.
+
+## 4. Application Structure
+
+Maintain this hierarchy:
+
+Subject → Topic → Lesson → YouTube Video
+
+Use a simple database structure containing subjects, topics, and lessons.
+
+Each lesson should store its title, YouTube URL/video ID, order, completion state, optional notes, and last-opened time.
+
+Calculate progress from completion states instead of storing duplicate percentages.
+
+## 5. Implementation Instructions
+
+Work in the following phases.
+
+**Phase 1 — Foundation**
+- Initialize the project.
+- Configure React, TypeScript, Tailwind, routing, and PWA support.
+- Establish a clean folder structure.
+
+**Phase 2 — Core Application**
+- Build the dashboard, subject pages, topic pages, and Study Mode.
+- Implement working create, read, update, and delete operations.
+- Implement YouTube embedding and progress tracking.
+
+**Phase 3 — Database and Authentication**
+- Create Supabase SQL migrations.
+- Configure authentication and Row Level Security.
+- Connect the application to persistent storage.
+
+**Phase 4 — Synchronization and PWA**
+- Implement IndexedDB caching.
+- Support safe offline edits and cross-device synchronization.
+- Add PWA installation support and JSON backups.
+
+**Phase 5 — Testing and Deployment**
+- Test the complete study workflow.
+- Verify responsive layouts.
+- Run linting, type checks, tests, and production builds.
+- Configure the application for Vercel deployment.
+- Document environment variables and deployment steps.
+
+## 6. Scope Restrictions
+
+Do not implement these features yet:
+- Quizzes or MCQs
+- AI-generated content
+- Study streaks
+- Social features
+- Gamification
+- Complex analytics
+- Payment systems
+- Admin dashboards
+
+These may be added in future versions.
+
+## 7. Agent Execution Rules
+
+1. Inspect the existing project before making changes.
+2. If the project is empty, initialize it using the specified stack.
+3. Implement features directly rather than only describing them.
+4. Work sequentially through the phases.
+5. Keep the application runnable after each phase.
+6. Write clean, modular, reusable code.
+7. Add relevant tests for important functionality.
+8. Do not introduce unnecessary dependencies.
+9. Never fabricate test results or claim that untested features work.
+10. If external credentials or account actions are required, provide exact setup instructions and continue with independently implementable work.
+11. Do not silently substitute mock data for a working database.
+12. At the end, summarize implemented features, commands run, test results, blockers, and remaining manual setup.
+
+## 8. Definition of Done
+
+The application is complete when I can:
+
+- Sign in using my email.
+- Create subjects and topics.
+- Add and organize YouTube lessons.
+- Watch supported videos inside StudyVault.
+- Mark lessons complete.
+- See progress update automatically.
+- Continue unfinished lessons.
+- Access the same data from both laptops and my phone.
+- Install the application as a PWA.
+- Export my study data.
+
+A particularly important test is:
+
+**Laptop A:** Create a lesson and mark it complete.
+
+**Phone:** Open StudyVault and verify the same completion status.
+
+**Laptop B:** Open StudyVault and verify that progress is synchronized.
+
+Also test editing offline, reconnecting, and safely syncing changes.
+
+## 9. Start Execution
+
+Begin by examining the current repository.
+
+Create a concise implementation plan, then immediately start Phase 1.
+
+Continue implementing the application phase by phase without waiting for approval between phases unless credentials, permissions, or a genuinely blocking decision are required.
+
+The final goal is a **working, polished, usable application**, not merely documentation, placeholder components, or a visual prototype.

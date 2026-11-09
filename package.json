@@ -1,0 +1,57 @@
+{
+  "name": "studyvault",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -b",
+    "check:supabase": "node scripts/check-supabase.mjs",
+    "supabase:login": "supabase login --name StudyVault --agent=no --output-format=text",
+    "supabase:plan": "node scripts/setup-supabase.mjs",
+    "supabase:setup": "node scripts/setup-supabase.mjs --apply",
+    "supabase:verify": "node scripts/verify-supabase-cloud.mjs --workflow",
+    "supabase:types": "node scripts/generate-supabase-types.mjs",
+    "starter:cloud": "node scripts/add-gate-starter.mjs",
+    "starter:cloud:apply": "node scripts/add-gate-starter.mjs --apply",
+    "lint": "eslint src",
+    "test": "vitest run",
+    "format": "prettier --write src vite.config.ts eslint.config.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.119.0",
+    "lucide-react": "^0.468.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.1.1"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.3.14",
+    "@eslint/js": "^9.39.0",
+    "@tailwindcss/vite": "^4.0.0",
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.39.0",
+    "fake-indexeddb": "^6.2.4",
+    "globals": "^16.5.0",
+    "prettier": "^3.9.10",
+    "supabase": "^3.0.0",
+    "tailwindcss": "^4.0.0",
+    "typescript": "~5.7.2",
+    "typescript-eslint": "^8.46.0",
+    "vite": "^6.0.7",
+    "vite-plugin-pwa": "^0.21.1",
+    "vitest": "^5.1.0"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "overrides": {
+    "glob": "^14.0.4",
+    "minimatch": "^11.0.5"
+  }
+}

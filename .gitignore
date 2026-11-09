@@ -1,0 +1,12 @@
+node_modules
+dist
+*.local
+.vercel
+.env
+.env.*
+!.env.example
+artifacts/
+supabase/.temp/
+supabase/.branches/
+.supabase/
+.studyvault-setup/

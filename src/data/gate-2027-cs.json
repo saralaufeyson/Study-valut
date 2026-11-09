@@ -1,0 +1,182 @@
+{
+  "id": "gate-2027-cs",
+  "title": "GATE 2027 · Computer Science & IT",
+  "checkedAt": "2026-11-07",
+  "sources": [
+    {
+      "label": "Official CS syllabus · IIT Madras",
+      "url": "https://gate2027.iitm.ac.in/static/doc/GATE2027_Syllabus/CS_GATE2027_Syllabus.pdf"
+    },
+    {
+      "label": "Official General Aptitude syllabus · IIT Madras",
+      "url": "https://gate2027.iitm.ac.in/static/doc/GATE2027_Syllabus/GA_GATE2027_Syllabus.pdf"
+    }
+  ],
+  "subjects": [
+    {
+      "name": "General Aptitude",
+      "description": "GATE 2027 CS · Verbal, quantitative, analytical, and spatial aptitude.",
+      "color": "sand",
+      "icon": "language",
+      "topics": [
+        "English grammar and vocabulary",
+        "Reading comprehension and narrative sequencing",
+        "Interpreting graphs, plots, maps, and tables",
+        "Ratios, percentages, powers, and logarithms",
+        "Permutations, combinations, and series",
+        "Geometry and mensuration",
+        "Elementary statistics and probability",
+        "Deduction, induction, analogy, and numerical reasoning",
+        "Spatial transformations, folding, cutting, and patterns"
+      ]
+    },
+    {
+      "name": "Engineering Mathematics",
+      "description": "GATE 2027 CS · Discrete mathematics, linear algebra, calculus, and probability.",
+      "color": "sage",
+      "icon": "math",
+      "topics": [
+        "Propositional and predicate logic",
+        "Sets, functions, relations, partial orders, and lattices",
+        "Monoids and groups",
+        "Graph connectivity, matching, and colouring",
+        "Counting, recurrences, and generating functions",
+        "Matrices, determinants, linear systems, and LU decomposition",
+        "Eigenvalues and eigenvectors",
+        "Limits, continuity, differentiation, and the mean value theorem",
+        "Integration and extrema",
+        "Random variables and probability distributions",
+        "Mean, median, mode, and standard deviation",
+        "Conditional probability and Bayes' theorem"
+      ]
+    },
+    {
+      "name": "Digital Logic",
+      "description": "GATE 2027 CS · Logic simplification, circuits, and number representation.",
+      "color": "blue",
+      "icon": "code",
+      "topics": [
+        "Boolean algebra and algebraic simplification",
+        "Karnaugh maps and tabular minimization",
+        "Combinational circuit design",
+        "Sequential circuit design",
+        "Fixed-point and floating-point representation and arithmetic"
+      ]
+    },
+    {
+      "name": "Computer Organization & Architecture",
+      "description": "GATE 2027 CS · Processor design, memory systems, I/O, and pipelines.",
+      "color": "violet",
+      "icon": "code",
+      "topics": [
+        "Instruction sets and addressing modes",
+        "ALU design",
+        "Hardwired and microprogrammed control",
+        "Memory interfacing, hierarchy, cache mapping, and performance",
+        "Interrupts and DMA interfaces",
+        "Instruction pipelines and hazards"
+      ]
+    },
+    {
+      "name": "Programming & Data Structures",
+      "description": "GATE 2027 CS · C programming and the structures used to organize data.",
+      "color": "rose",
+      "icon": "code",
+      "topics": [
+        "Programming with C",
+        "Recursive programs",
+        "Arrays and linked lists",
+        "Stacks and queues",
+        "Trees and binary search trees",
+        "Binary heaps",
+        "Representing graphs"
+      ]
+    },
+    {
+      "name": "Algorithms",
+      "description": "GATE 2027 CS · Complexity, design techniques, and graph algorithms.",
+      "color": "sage",
+      "icon": "code",
+      "topics": [
+        "Worst-case asymptotic time and space analysis",
+        "Search, sorting, and hashing",
+        "Divide and conquer",
+        "Greedy methods",
+        "Dynamic programming",
+        "Traversing graphs",
+        "Minimum spanning tree algorithms",
+        "Shortest-path algorithms"
+      ]
+    },
+    {
+      "name": "Theory of Computation",
+      "description": "GATE 2027 CS · Automata, formal languages, and computability.",
+      "color": "violet",
+      "icon": "book",
+      "topics": [
+        "Finite automata and regular expressions",
+        "Regular languages and pumping arguments",
+        "Context-free grammars and languages",
+        "Pushdown automata and context-free pumping arguments",
+        "Turing machines and undecidable problems"
+      ]
+    },
+    {
+      "name": "Compiler Design",
+      "description": "GATE 2027 CS · Translation stages, runtime organization, and optimization.",
+      "color": "sand",
+      "icon": "code",
+      "topics": [
+        "Lexical analysis and parsing",
+        "Syntax-directed translation",
+        "Runtime environments and intermediate code",
+        "Local code optimization",
+        "Data-flow analysis: constants, liveness, and common subexpressions"
+      ]
+    },
+    {
+      "name": "Operating Systems",
+      "description": "GATE 2027 CS · Processes, synchronization, scheduling, memory, and files.",
+      "color": "blue",
+      "icon": "code",
+      "topics": [
+        "System calls, processes, and threads",
+        "Interprocess communication",
+        "Concurrency and synchronization",
+        "Deadlock handling",
+        "CPU and I/O scheduling",
+        "Memory management and virtual memory",
+        "File-system organization"
+      ]
+    },
+    {
+      "name": "Databases",
+      "description": "GATE 2027 CS · Data models, querying, normalization, indexing, and transactions.",
+      "color": "rose",
+      "icon": "book",
+      "topics": [
+        "Entity-relationship modelling",
+        "Relational algebra and tuple calculus",
+        "Querying with SQL",
+        "Integrity constraints and normal forms",
+        "File organization and B/B+ tree indexing",
+        "Transactions and concurrency management"
+      ]
+    },
+    {
+      "name": "Computer Networks",
+      "description": "GATE 2027 CS · Layering, switching, routing, IPv4, TCP, and network services.",
+      "color": "sage",
+      "icon": "science",
+      "topics": [
+        "Layering, switching methods, and performance metrics",
+        "Link-layer error detection, MAC, and Ethernet",
+        "Distance-vector and link-state routing",
+        "IPv4 fragmentation, CIDR, and NAT",
+        "TCP flow and congestion management",
+        "Socket programming interface",
+        "DNS and HTTP services"
+      ]
+    }
+  ]
+}

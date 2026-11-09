@@ -1,0 +1,30 @@
+.pwa-update {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 210;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 520px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  border-radius: 10px;
+  box-shadow: 0 6px 35px #1c39201f;
+  font-size: 11px;
+  line-height: 1.8;
+}
+@media (max-width: 520px) {
+  .pwa-update {
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    flex-wrap: wrap;
+    font-size: 10px;
+  }
+  .pwa-update > span {
+    width: 100%;
+  }
+}
