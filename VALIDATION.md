@@ -1,5 +1,15 @@
-# StudyVault verification — November 7, 2026
+# StudyVault verification — updated November 11, 2026
 
+## CUET PG and bank-exam starter options — November 11, 2026
+
+- Added CUET PG General Paper (COQP11): 6 subjects and 59 ordered topics based on NTA’s currently published common-paper syllabus. The preview includes its paper code, scope, source links, and English/Hindi topic groups.
+- Added General Bank Exams: 7 subjects and 66 topics covering quantitative aptitude, reasoning, English, data interpretation, banking awareness, computing, and exam-dependent PO descriptive writing. This is a curated foundation across bank recruitment, with individual notification requirements stated in the preview.
+- Preserved GATE 2027 CS with its original 11 subjects and 77 topics. All three are independent selectable cards under Settings → Starter packs, with expandable topic previews and explicit import buttons. The empty-library shortcut scrolls to this catalog; existing #gate-starter links remain supported.
+- Generalized the existing atomic import helper to require a selected pack ID. CUET and bank subject names include exam prefixes to keep their progress separate. Existing descriptions, ordering, notes, lessons, and completion are preserved; repeat imports in the same loaded library add only missing names. No fabricated lessons or progress are included.
+- All 75 tests across 8 files passed. TypeScript, lint, and the production/PWA build passed. Ten starter-library tests cover all three hierarchies, repeat imports, importing packs together, personal-data preservation, selected account sync queues, and invalid selections.
+- Playwright passed all three previews, expandable topics/source links, cancel without writes, selected-only imports, no duplicates, reload persistence, combined 24-subject/202-topic hierarchy, CUET topic navigation, no fabricated lessons, 390px and 320px page/dialog layouts, and zero uncaught application errors. Screenshots: artifacts/starter-packs-desktop.png and artifacts/starter-packs-mobile.png.
+- Browser imports used a fresh isolated guest context. No real account was populated, no email was sent, and no remote database migration or configuration change was necessary. Account imports continue through the existing owner-scoped save/sync path; the optional administrator CLI remains GATE-only.
+- Changes and the production build are ready locally. Publish these frontend changes through the connected Git/Vercel deployment before expecting the new choices on the public site.
 ## Signup verification and password login — November 9, 2026
 
 - Added separate Log in and Sign up forms. Signup collects a password and sends the Supabase confirmation link to /settings; future logins use signInWithPassword and send no login email.
@@ -10,6 +20,7 @@
 - Playwright passed signup verification callbacks, mismatch/credential handling, password-only login, existing account password setup, preserved library/reload behavior, sign-out, recovery callbacks, expired links, mobile layout, and no uncaught errors. No password appeared in learning records or local storage. Supabase HTTP was mocked; no real email or real account mutation was performed by the browser test. Screenshot: artifacts/password-signup-mobile.png.
 - A live password-endpoint probe correctly rejected a randomly generated nonexistent test account with invalid_credentials. No email was sent and no account was created. A successful real password login remains a user acceptance step after setting a private password.
 - The source and production build are ready locally. The existing Vercel site must receive this updated frontend before these controls appear there. Signup verification and password recovery still require email delivery; custom SMTP remains necessary for friends' addresses with the current built-in sender restrictions.
+
 ## Production sign-in redirect fix — November 9, 2026
 
 - Verified that https://studyvalut-kappa.vercel.app and its /settings route return HTTP 200, use this checkout's Supabase project, and request Magic Link redirects to the browser's current origin.
@@ -24,7 +35,7 @@
 | --- | --- |
 | `npm run lint` | Passed |
 | `npm run typecheck` | Passed |
-| `npm test` | 68 tests passed across 8 files |
+| `npm test` | 75 tests passed across 8 files |
 | `npm run check:supabase` | Real configured client initialized successfully |
 | `npm run supabase:setup` | Completed against the existing cloud project; rerun verified idempotent setup |
 | `npm run supabase:verify` | Live schema/security and rollback-only CRUD workflow passed |
@@ -33,7 +44,7 @@
 | Full dependency audit after tooling updates | 4 low-severity findings remain in development/build dependencies; no critical/high/moderate findings |
 | Production HTTP check at `http://127.0.0.1:4173/` | 200 |
 
-The 68 tests include actual PostgreSQL migration execution in PGlite, Row Level Security, revision conflicts, idempotent retries, parent ownership, tombstones, blocked writes under deleted parents, concurrent IndexedDB transactions, account/cache isolation, edits during in-flight synchronization, backup validation, accepted/rejected YouTube URL formats, progress, lesson resume behavior, public-key validation, and malformed cloud-response rejection. SQL unit tests now reproduce Supabase's direct default function grants and verify that the follow-up migration removes anonymous execution privileges.
+The 75 tests include actual PostgreSQL migration execution in PGlite, Row Level Security, revision conflicts, idempotent retries, parent ownership, tombstones, blocked writes under deleted parents, concurrent IndexedDB transactions, account/cache isolation, edits during in-flight synchronization, backup validation, accepted/rejected YouTube URL formats, progress, lesson resume behavior, public-key validation, and malformed cloud-response rejection. SQL unit tests now reproduce Supabase's direct default function grants and verify that the follow-up migration removes anonymous execution privileges.
 
 ## Applied cloud setup
 
@@ -49,7 +60,7 @@ The 68 tests include actual PostgreSQL migration execution in PGlite, Row Level 
 - Verified that unauthenticated API requests are denied and that all four tables have RLS enabled. The three learning tables allow authenticated owner reads and deny direct client writes; the RPC permits authenticated execution only.
 - Sent one real Magic Link to the user-authorized test address. Supabase subsequently confirmed email verification and a successful sign-in. No account address, access token, refresh token, or private learning content is included in this report.
 
-The production build passed with a non-blocking warning that its main minified JavaScript chunk exceeds 500 kB (about 171 kB gzip).
+The production build passed with a non-blocking warning that its main minified JavaScript chunk exceeds 500 kB (about 175 kB gzip).
 
 ## Browser checks
 

@@ -53,13 +53,25 @@ References: [Supabase password authentication](https://supabase.com/docs/guides/
 
 ## Use
 
-### GATE 2027 CS starter library
+### Exam starter packs
 
-Open **Settings → Preview GATE CS starter** to add 11 subjects and 77 ordered topics from the official IIT Madras [CS syllabus](https://gate2027.iitm.ac.in/static/doc/GATE2027_Syllabus/CS_GATE2027_Syllabus.pdf) and [General Aptitude syllabus](https://gate2027.iitm.ac.in/static/doc/GATE2027_Syllabus/GA_GATE2027_Syllabus.pdf), checked on 7 November 2026. Topic titles are grouped for studying. General Aptitude is included alongside all ten CS sections.
+Open **Settings → Starter packs** to preview and add one of these outlines:
 
-The starter adds missing subjects/topics by name, preserves existing records, and includes no video links, completed lessons, or sample notes. Add your own YouTube lessons to start tracking progress. It works locally or in your signed-in account through the normal save/sync path. Repeating it in the same loaded library adds no duplicate names; renamed or deleted topics can be added again. Sign in before adding it for cross-device access.
+| Pack | Subjects | Topics | Coverage |
+| --- | --- | --- | --- |
+| GATE 2027 CS | 11 | 77 | General Aptitude and all ten CS sections |
+| CUET PG General Paper (COQP11) | 6 | 59 | English/Hindi comprehension, general awareness, computing, aptitude, reasoning |
+| General Bank Exams | 7 | 66 | Quantitative aptitude, reasoning, English, data interpretation, banking awareness, computers, exam-dependent PO descriptive writing |
 
-For an administrator of a personal project with exactly one confirmed account that has signed in, `npm run starter:cloud` previews the additions in a rolled-back transaction. `npm run starter:cloud:apply` saves them through the authenticated sync RPC in one transaction. It refuses ambiguous account selection. This is an explicit optional starter import, separate from schema migrations; normal Supabase setup never seeds learning data. The pack is maintained in `src/data/gate-2027-cs.json`.
+Expand subjects in the preview to inspect their topics and source links. Only the selected pack is added, after pressing its Add button. Existing subjects, descriptions, notes, lessons, ordering, and completion are preserved. Repeating a pack in the same loaded library adds only missing names; renamed or deleted topics can be added again. CUET and bank subjects have exam prefixes to keep progress separate when several packs are imported.
+
+The packs contain no video links, completed lessons, or sample notes. Add your own YouTube lessons to start tracking progress. Imports use the existing atomic local save and account sync queue. Sign in first for cross-device access, or copy a local library into your account later. The empty-library screen also links to the pack catalog.
+
+The GATE outline uses IIT Madras’s [CS](https://gate2027.iitm.ac.in/static/doc/GATE2027_Syllabus/CS_GATE2027_Syllabus.pdf) and [General Aptitude](https://gate2027.iitm.ac.in/static/doc/GATE2027_Syllabus/GA_GATE2027_Syllabus.pdf) syllabi, checked on 7 November 2026. CUET uses NTA’s currently published [COQP11 syllabus](https://cdnbbsr.s3waas.gov.in/s388a839f2f6f1427879fc33ee4acf4f66/uploads/2025/12/202512131769837174.pdf), checked on 11 November 2026; confirm your chosen course’s paper/language requirements and the syllabus for your exam cycle.
+
+The bank pack is a curated foundation across IBPS/SBI-style recruitment, not a single official combined syllabus or a claim that every exam uses every section. Its sources include the official [SBI PO scheme](https://sbi.bank.in/documents/77530/57941/18062026_1_Detailed_Adv.2026.pdf/1f1a9532-8a2f-6e59-08a0-616d62a497b1?t=1781759726353) and [Junior Associates prelims booklet](https://sbi.bank.in/webfiles/uploads/files_2627/09/SBI_JA-Customer_Support_Sales-IH_Pre-2026-27_Eng.pdf), checked on 11 November 2026. Match optional computer/descriptive topics to the target notification. Current affairs are study headings, with no stale facts prefilled.
+
+Packs are maintained in `src/data/gate-2027-cs.json`, `src/data/cuet-pg-coqp11.json`, and `src/data/bank-exams-general.json`. The optional administrator commands `npm run starter:cloud` / `npm run starter:cloud:apply` remain **GATE-only**, require exactly one confirmed account that has signed in, and preview/save through the authenticated RPC. The new options use the current user’s Settings import. Adding options does not seed remote accounts or run database migrations.
 
 - Add a subject, then a topic, then a YouTube lesson with your own title.
 - Standard watch, `youtu.be`, Shorts, live, and embed video links are supported, including watch links with playlist parameters. Playlist-only URLs cannot identify a specific video and are rejected. Bulk playlist importing is outside this version’s scope.

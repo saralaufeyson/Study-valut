@@ -1,0 +1,127 @@
+{
+  "id": "cuet-pg-coqp11",
+  "title": "CUET PG · General Paper (COQP11)",
+  "shortName": "CUET PG",
+  "description": "English and Hindi comprehension, general awareness, computer basics, aptitude, and reasoning for COQP11.",
+  "scope": "Based on NTA’s currently published COQP11 outline. Check the latest syllabus and your chosen university’s paper and language requirements for your exam cycle.",
+  "checkedAt": "2026-11-11",
+  "sources": [
+    {
+      "label": "NTA · COQP11 syllabus",
+      "url": "https://cdnbbsr.s3waas.gov.in/s388a839f2f6f1427879fc33ee4acf4f66/uploads/2025/12/202512131769837174.pdf"
+    },
+    {
+      "label": "NTA · CUET PG common papers",
+      "url": "https://exams.nta.nic.in/cuet-pg/syllabus/common/"
+    }
+  ],
+  "subjects": [
+    {
+      "name": "CUET PG · English Comprehension",
+      "description": "COQP11 · Grammar, comprehension, paragraph structure, and vocabulary.",
+      "color": "sand",
+      "icon": "language",
+      "topics": [
+        "Grammar and correct usage",
+        "Spotting language errors",
+        "Editing and improving sentences",
+        "Reading passages and completing paragraphs",
+        "Ordering paragraph sentences",
+        "Synonyms and antonyms",
+        "Replacing phrases with one word",
+        "Understanding idioms and phrases"
+      ]
+    },
+    {
+      "name": "CUET PG · Hindi Comprehension",
+      "description": "COQP11 · Hindi language topics listed by NTA; check the language requirements for your course.",
+      "color": "rose",
+      "icon": "language",
+      "topics": [
+        "व्याकरण और भाषा का प्रयोग",
+        "अशुद्ध प्रयोग की पहचान",
+        "वाक्य शुद्धि और परिष्कार",
+        "पाठ बोधन और वाक्य पूर्णता",
+        "परिच्छेद का सही क्रम",
+        "समानार्थी और विलोम शब्द",
+        "अनेक शब्दों के लिए एक शब्द",
+        "मुहावरे और कहावतें"
+      ]
+    },
+    {
+      "name": "CUET PG · General Knowledge & Awareness",
+      "description": "COQP11 · Static awareness and understanding public affairs across the NTA topic groups.",
+      "color": "sage",
+      "icon": "book",
+      "topics": [
+        "Literature and cultural awareness",
+        "History and notable personalities",
+        "Constitution, politics, and legal awareness",
+        "Geography fundamentals",
+        "National and international economies",
+        "Basic economic concepts",
+        "Trade and business awareness",
+        "Everyday science",
+        "Sports awareness"
+      ]
+    },
+    {
+      "name": "CUET PG · Computer Basics",
+      "description": "COQP11 · Computer operation, office software, internet concepts, and key terminology.",
+      "color": "blue",
+      "icon": "code",
+      "topics": [
+        "Computer fundamentals and types",
+        "Hardware, software, and input/output devices",
+        "Memory and storage devices",
+        "Using Microsoft Windows",
+        "Office applications and word processing",
+        "Abbreviations, keyboard shortcuts, and key terms",
+        "Internet, websites, and browsers",
+        "Computer networking fundamentals",
+        "Computer viruses and protection basics"
+      ]
+    },
+    {
+      "name": "CUET PG · General Aptitude",
+      "description": "COQP11 · Arithmetic and mathematical aptitude, grouped into manageable study topics.",
+      "color": "violet",
+      "icon": "math",
+      "topics": [
+        "Clocks and calendar problems",
+        "Averages",
+        "Numbers, ages, LCM, and HCF",
+        "Simplifying numerical expressions",
+        "Percentages, profit, loss, and discounts",
+        "Ratios, proportions, and mixtures",
+        "Partnership calculations",
+        "Simple and compound interest",
+        "Work rates, pipes, and cisterns",
+        "Speed, distance, time, and train problems",
+        "Stocks, shares, and bankers’ discount",
+        "Geometry and areas",
+        "Volume and surface area",
+        "Sets and unions",
+        "Permutations and combinations"
+      ]
+    },
+    {
+      "name": "CUET PG · Logical Reasoning",
+      "description": "COQP11 · Ordering, relationships, arguments, patterns, and analytical deductions.",
+      "color": "sand",
+      "icon": "art",
+      "topics": [
+        "Ranking and number sequences",
+        "Linear and matrix arrangements",
+        "Sequencing information",
+        "Identifying assumptions",
+        "Evaluating arguments and conclusions",
+        "Cause, effect, and inference",
+        "Codes and symbol-based deductions",
+        "Family relationships",
+        "Direction and distance reasoning",
+        "Analogies and non-verbal patterns"
+      ]
+    }
+  ]
+}

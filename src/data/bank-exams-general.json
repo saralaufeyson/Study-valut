@@ -1,0 +1,146 @@
+{
+  "id": "bank-exams-general",
+  "title": "General Bank Exams · Foundation",
+  "shortName": "Bank exams",
+  "description": "Shared foundations for bank PO and clerk preparation, from prelims arithmetic to mains awareness and analysis.",
+  "scope": "A general study framework for IBPS/SBI-style exams, not a single exam’s complete syllabus. Check your target notification. Computer and descriptive sections depend on the exam; descriptive English is mainly for PO mains.",
+  "checkedAt": "2026-11-11",
+  "sources": [
+    {
+      "label": "SBI · PO examination scheme",
+      "url": "https://sbi.bank.in/documents/77530/57941/18062026_1_Detailed_Adv.2026.pdf/1f1a9532-8a2f-6e59-08a0-616d62a497b1?t=1781759726353"
+    },
+    {
+      "label": "SBI · Junior Associates prelims booklet",
+      "url": "https://sbi.bank.in/webfiles/uploads/files_2627/09/SBI_JA-Customer_Support_Sales-IH_Pre-2026-27_Eng.pdf"
+    },
+    {
+      "label": "IBPS · Current recruitment notices",
+      "url": "https://www.ibps.in/"
+    }
+  ],
+  "subjects": [
+    {
+      "name": "Bank Exams · Quantitative Aptitude",
+      "description": "Common arithmetic and numerical foundations for PO and clerk-style recruitment.",
+      "color": "sage",
+      "icon": "math",
+      "topics": [
+        "Number systems, simplification, and approximation",
+        "Percentages and ratio/proportion",
+        "Averages and age problems",
+        "Profit, loss, and discounts",
+        "Simple and compound interest",
+        "Work rates, pipes, and cisterns",
+        "Speed, distance, trains, and boats",
+        "Mixtures and alligation",
+        "Partnership calculations",
+        "Number series",
+        "Algebra and quadratic equations",
+        "Geometry and mensuration",
+        "Probability and counting methods",
+        "Quantitative comparison and data sufficiency"
+      ]
+    },
+    {
+      "name": "Bank Exams · Reasoning Ability",
+      "description": "Common reasoning skills, from basic relationships to mains-level analytical puzzles.",
+      "color": "violet",
+      "icon": "art",
+      "topics": [
+        "Linear and circular seating",
+        "Floor, box, and scheduling puzzles",
+        "Syllogisms",
+        "Logical inequalities",
+        "Coding and decoding",
+        "Family relationships and directions",
+        "Order, ranking, and sequences",
+        "Input-output patterns",
+        "Reasoning data sufficiency",
+        "Statements, assumptions, and conclusions",
+        "Cause/effect and courses of action",
+        "Critical reasoning and decision making"
+      ]
+    },
+    {
+      "name": "Bank Exams · English Language",
+      "description": "Reading, grammar, vocabulary, and editing for objective English sections.",
+      "color": "sand",
+      "icon": "language",
+      "topics": [
+        "Reading comprehension",
+        "Grammar and spotting errors",
+        "Sentence editing and improvement",
+        "Cloze passages",
+        "Ordering sentences and paragraphs",
+        "Completing sentences and paragraphs",
+        "Vocabulary, synonyms, and antonyms",
+        "Idioms, phrases, and word usage"
+      ]
+    },
+    {
+      "name": "Bank Exams · Data Interpretation & Analysis",
+      "description": "Interpreting numerical information and solving connected problems, especially for mains.",
+      "color": "blue",
+      "icon": "math",
+      "topics": [
+        "Tables and tabulated comparisons",
+        "Bar, line, and pie charts",
+        "Mixed graphical datasets",
+        "Caselet interpretation",
+        "Missing-data problems",
+        "Percentage change and ratio-based analysis",
+        "Arithmetic-based data sets",
+        "Timed multi-question data sets"
+      ]
+    },
+    {
+      "name": "Bank Exams · Banking & Financial Awareness",
+      "description": "Banking concepts and a framework for keeping current affairs up to date; no dated facts are prefilled.",
+      "color": "rose",
+      "icon": "book",
+      "topics": [
+        "Indian banking system and bank types",
+        "RBI functions and monetary policy",
+        "Deposits, lending, and interest concepts",
+        "Digital payments and banking technology",
+        "Financial inclusion and government initiatives",
+        "Economy, inflation, and key indicators",
+        "Budget and economic survey review",
+        "Financial markets and institutions",
+        "Banking terminology and regulations",
+        "Monthly national, international, and financial current affairs"
+      ]
+    },
+    {
+      "name": "Bank Exams · Computer Knowledge",
+      "description": "Computer foundations for exams that include computer awareness or aptitude; check your notification.",
+      "color": "blue",
+      "icon": "code",
+      "topics": [
+        "Hardware, software, and operating systems",
+        "Memory, storage, and input/output",
+        "Office and spreadsheet fundamentals",
+        "Internet, browsers, and email",
+        "Networking concepts",
+        "Digital safety and cybersecurity basics",
+        "Computer abbreviations and shortcuts",
+        "Databases and digital banking applications"
+      ]
+    },
+    {
+      "name": "Bank Exams · Descriptive English (PO)",
+      "description": "Exam-dependent PO mains practice. Formats vary by bank; use the formats in your target notification.",
+      "color": "sand",
+      "icon": "language",
+      "topics": [
+        "Essay structure and timed writing",
+        "Formal letter writing",
+        "Professional email writing",
+        "Precis and concise summaries",
+        "Report writing",
+        "Situation analysis and written responses"
+      ]
+    }
+  ]
+}

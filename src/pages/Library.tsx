@@ -149,8 +149,8 @@ function EmptyLibrary({ onCreate }: { onCreate: () => void }) {
         Create your first subject
       </button>
       <p>
-        <Link className="subtle-link" to="/settings#gate-starter">
-          Start with the GATE 2027 CS syllabus <ArrowRight size={14} />
+        <Link className="subtle-link" to="/settings#starter-packs">
+          Browse exam starter packs <ArrowRight size={14} />
         </Link>
       </p>
     </div>

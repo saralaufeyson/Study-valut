@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest'
-import { addGateCSStarter, gateCS, starterTopicCount } from './starter-pack'
+import {
+  addStarterPack,
+  getStarterPack,
+  starterPacks,
+  topicCount,
+} from './starter-pack'
+import type { StarterPackId } from './starter-pack'
 import {
   allLessons,
   colors,
@@ -11,44 +17,104 @@ import {
 import { putChange } from './database'
 import { makeBackup, parseBackup } from './backup'
 
-describe('GATE CS starter library', () => {
-  it('creates a valid importable library with ordered topics and zero lesson progress', () => {
+const normalize = (value: string) =>
+  value.trim().replace(/\s+/g, ' ').toLowerCase()
+
+describe('exam starter libraries', () => {
+  it.each(starterPacks)(
+    '$title creates a valid library with ordered topics and zero fabricated progress',
+    (pack) => {
+      const workspace = emptyWorkspace()
+      expect(addStarterPack(workspace, false, pack.id)).toEqual({
+        subjects: pack.subjects.length,
+        topics: topicCount(pack),
+      })
+      expect(
+        pack.subjects.every((subject) =>
+          colors.some((color) => color === subject.color),
+        ),
+      ).toBe(true)
+      expect(
+        new Set(pack.subjects.map((subject) => normalize(subject.name))).size,
+      ).toBe(pack.subjects.length)
+      for (const subject of pack.subjects)
+        expect(new Set(subject.topics.map(normalize)).size).toBe(
+          subject.topics.length,
+        )
+      const backup = makeBackup(workspace)
+      expect(parseBackup(JSON.stringify(backup)).topics).toHaveLength(
+        topicCount(pack),
+      )
+      for (const subject of subjectsOf(workspace)) {
+        const topics = topicsOf(workspace, subject.id)
+        expect(topics.map((topic) => topic.position)).toEqual(
+          topics.map((_, index) => index),
+        )
+      }
+      expect(progress(allLessons(workspace))).toEqual({
+        completed: 0,
+        total: 0,
+        percent: 0,
+      })
+      expect(workspace.pending).toEqual({})
+    },
+  )
+
+  it.each(starterPacks)(
+    '$title can be added twice without duplicates or changes to saved rows',
+    (pack) => {
+      const workspace = emptyWorkspace()
+      addStarterPack(workspace, true, pack.id)
+      const saved = structuredClone(workspace)
+      expect(addStarterPack(workspace, true, pack.id)).toEqual({
+        subjects: 0,
+        topics: 0,
+      })
+      expect(workspace).toEqual(saved)
+    },
+  )
+
+  it('keeps all three exam libraries separate when imported together', () => {
     const workspace = emptyWorkspace()
-    const added = addGateCSStarter(workspace, false)
-    expect(added).toEqual({ subjects: 11, topics: starterTopicCount })
+    for (const pack of starterPacks) addStarterPack(workspace, false, pack.id)
+    expect(subjectsOf(workspace)).toHaveLength(
+      starterPacks.reduce((sum, pack) => sum + pack.subjects.length, 0),
+    )
+    expect(Object.values(workspace.topics)).toHaveLength(
+      starterPacks.reduce((sum, pack) => sum + topicCount(pack), 0),
+    )
+    for (const pack of starterPacks)
+      expect(addStarterPack(workspace, false, pack.id)).toEqual({
+        subjects: 0,
+        topics: 0,
+      })
+    expect(getStarterPack('gate-2027-cs').subjects).toHaveLength(11)
+    expect(topicCount(getStarterPack('gate-2027-cs'))).toBe(77)
+    expect(getStarterPack('cuet-pg-coqp11').title).toContain('COQP11')
     expect(
-      gateCS.subjects.every((s) =>
-        colors.includes(s.color as (typeof colors)[number]),
+      getStarterPack('cuet-pg-coqp11').subjects.some((subject) =>
+        subject.name.includes('Hindi'),
       ),
     ).toBe(true)
-    expect(
-      parseBackup(JSON.stringify(makeBackup(workspace))).topics,
-    ).toHaveLength(starterTopicCount)
-    for (const subject of subjectsOf(workspace)) {
-      const topics = topicsOf(workspace, subject.id)
-      expect(topics.map((t) => t.position)).toEqual(topics.map((_, i) => i))
-    }
-    expect(progress(allLessons(workspace))).toEqual({
-      completed: 0,
-      total: 0,
-      percent: 0,
-    })
-    expect(workspace.pending).toEqual({})
+    expect(getStarterPack('bank-exams-general').scope).toContain(
+      'depend on the exam',
+    )
   })
 
-  it('adds only missing rows and preserves existing edits, ordering, lessons, and progress', () => {
-    const workspace = emptyWorkspace()
+  it('adds missing bank topics after existing ordering while preserving personal content and completed lessons', () => {
+    const workspace = emptyWorkspace(),
+      pack = getStarterPack('bank-exams-general')
     const subjectId = crypto.randomUUID(),
       topicId = crypto.randomUUID(),
       lessonId = crypto.randomUUID()
-    const template = gateCS.subjects.find((s) => s.name === 'Algorithms')!
+    const template = pack.subjects[0]
     putChange(
       workspace,
       'subjects',
       subjectId,
       {
-        name: '  ALGORITHMS  ',
-        description: 'My study plan',
+        name: `  ${template.name.toUpperCase()}  `,
+        description: 'My personal study plan',
         color: 'rose',
         icon: 'art',
       },
@@ -78,32 +144,46 @@ describe('GATE CS starter library', () => {
       false,
     )
     const original = structuredClone(workspace)
-    expect(addGateCSStarter(workspace, false)).toEqual({
-      subjects: 10,
-      topics: starterTopicCount - 1,
+    expect(addStarterPack(workspace, false, pack.id)).toEqual({
+      subjects: pack.subjects.length - 1,
+      topics: topicCount(pack) - 1,
     })
     expect(workspace.subjects[subjectId]).toEqual(original.subjects[subjectId])
     expect(workspace.topics[topicId]).toEqual(original.topics[topicId])
     expect(workspace.lessons).toEqual(original.lessons)
     expect(topicsOf(workspace, subjectId)[1].position).toBe(13)
-    const after = structuredClone(workspace)
-    expect(addGateCSStarter(workspace, false)).toEqual({
-      subjects: 0,
-      topics: 0,
-    })
-    expect(workspace).toEqual(after)
+    expect(
+      parseBackup(JSON.stringify(makeBackup(workspace))).lessons[0].notes,
+    ).toBe('Keep my revision notes')
   })
 
-  it('queues every new record for account sync while leaving other workspaces untouched', () => {
+  it('queues only the selected CUET pack for account sync and leaves the guest workspace untouched', () => {
     const account = emptyWorkspace(),
-      guest = emptyWorkspace()
-    addGateCSStarter(account, true)
-    expect(Object.values(account.pending)).toHaveLength(11 + starterTopicCount)
+      guest = emptyWorkspace(),
+      pack = getStarterPack('cuet-pg-coqp11')
+    addStarterPack(account, true, pack.id)
+    expect(Object.values(account.pending)).toHaveLength(
+      pack.subjects.length + topicCount(pack),
+    )
     expect(
       Object.values(account.pending).every(
-        (p) => p.baseRevision === 0 && p.table !== 'lessons',
+        (change) => change.baseRevision === 0 && change.table !== 'lessons',
+      ),
+    ).toBe(true)
+    expect(
+      subjectsOf(account).every((subject) =>
+        subject.name.startsWith('CUET PG'),
       ),
     ).toBe(true)
     expect(guest).toEqual(emptyWorkspace())
+  })
+
+  it('rejects an invalid selection before saving or accidentally falling back to GATE', () => {
+    const workspace = emptyWorkspace()
+    for (const id of ['unknown-pack', '__proto__'])
+      expect(() =>
+        addStarterPack(workspace, true, id as StarterPackId),
+      ).toThrow('valid starter pack')
+    expect(workspace).toEqual(emptyWorkspace())
   })
 })

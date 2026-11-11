@@ -14,7 +14,8 @@ import type { Entity, Table, Workspace } from './model'
 import type { Backup } from './backup'
 import type { Json } from './database.types'
 import { parseSyncResult } from './sync-result'
-import { addGateCSStarter } from './starter-pack'
+import { addStarterPack, getStarterPack } from './starter-pack'
+import type { StarterPackId } from './starter-pack'
 
 type SyncState = 'local' | 'offline' | 'syncing' | 'synced' | 'error'
 interface Store {
@@ -35,7 +36,7 @@ interface Store {
   remove: (table: Table, id: string) => Promise<void>
   reorder: (table: 'topics' | 'lessons', ids: string[]) => Promise<void>
   importData: (backup: Backup) => Promise<void>
-  addStarter: () => Promise<void>
+  addStarter: (id: StarterPackId) => Promise<void>
   sync: () => Promise<void>
   resolve: (id: string, keepLocal: boolean) => Promise<void>
 }
@@ -360,15 +361,16 @@ export function VaultProvider({ children }: { children: ReactNode }) {
       }
     })
   }
-  async function addStarter() {
+  async function addStarter(id: StarterPackId) {
+    const pack = getStarterPack(id)
     let added = { subjects: 0, topics: 0 }
     await save((w) => {
-      added = addGateCSStarter(w, !!user)
+      added = addStarterPack(w, !!user, id)
     })
     notify(
       added.subjects || added.topics
-        ? `Added ${added.subjects} subjects and ${added.topics} topics for GATE 2027 CS. Add your first video to begin.`
-        : 'Your GATE 2027 CS subjects and topics are already in this library.',
+        ? `Added ${added.subjects} subjects and ${added.topics} topics for ${pack.shortName}. Add your first video to begin.`
+        : `Your ${pack.shortName} subjects and topics are already in this library.`,
     )
   }
   if (storageError)

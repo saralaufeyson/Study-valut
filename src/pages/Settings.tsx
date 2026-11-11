@@ -12,7 +12,7 @@ import { downloadBackup, makeBackup, parseBackup } from '../lib/backup'
 import type { Backup } from '../lib/backup'
 import { transact } from '../lib/database'
 import { Modal } from '../components/Editor'
-import { GateStarter } from '../components/GateStarter'
+import { StarterPacks } from '../components/StarterPacks'
 import { AccountCard } from '../components/Account'
 
 export function SettingsPage() {
@@ -228,7 +228,7 @@ export function SettingsPage() {
           </div>
         </section>
       )}
-      <GateStarter />
+      <StarterPacks />
       <section className="settings-card">
         <div className="settings-icon sand">
           <Download size={23} />

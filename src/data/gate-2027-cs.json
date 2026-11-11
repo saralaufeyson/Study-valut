@@ -1,6 +1,9 @@
 {
   "id": "gate-2027-cs",
   "title": "GATE 2027 · Computer Science & IT",
+  "shortName": "GATE CS",
+  "description": "All ten core CS sections and General Aptitude, organized using IIT Madras’s GATE 2027 syllabus.",
+  "scope": "For the GATE 2027 Computer Science & IT paper. Add your own videos under these subjects and topics to begin studying.",
   "checkedAt": "2026-11-07",
   "sources": [
     {

@@ -1,18 +1,35 @@
-import pack from '../data/gate-2027-cs.json'
+import gate from '../data/gate-2027-cs.json'
+import cuet from '../data/cuet-pg-coqp11.json'
+import bank from '../data/bank-exams-general.json'
 import { putChange } from './database'
 import { subjectsOf, topicsOf } from './model'
-import type { Color, Workspace } from './model'
+import type { Workspace } from './model'
 
-export const gateCS = pack
-export const starterTopicCount = pack.subjects.reduce(
-  (total, subject) => total + subject.topics.length,
-  0,
-)
+const packsById = {
+  'gate-2027-cs': { ...gate, id: 'gate-2027-cs' },
+  'cuet-pg-coqp11': { ...cuet, id: 'cuet-pg-coqp11' },
+  'bank-exams-general': { ...bank, id: 'bank-exams-general' },
+} as const
+export type StarterPackId = keyof typeof packsById
+export const starterPacks = Object.values(packsById)
+export type StarterPack = (typeof starterPacks)[number]
+export const getStarterPack = (id: StarterPackId): StarterPack => {
+  if (!Object.prototype.hasOwnProperty.call(packsById, id))
+    throw new Error('Choose a valid starter pack.')
+  return packsById[id]
+}
+export const topicCount = (pack: StarterPack) =>
+  pack.subjects.reduce((total, subject) => total + subject.topics.length, 0)
 const normalized = (name: string) =>
   name.trim().replace(/\s+/g, ' ').toLowerCase()
 
 // Called inside the workspace transaction: add missing rows, preserving all edits.
-export function addGateCSStarter(workspace: Workspace, cloud: boolean) {
+export function addStarterPack(
+  workspace: Workspace,
+  cloud: boolean,
+  id: StarterPackId,
+) {
+  const pack = getStarterPack(id)
   let subjects = 0
   let topics = 0
   for (const template of pack.subjects) {
@@ -28,7 +45,7 @@ export function addGateCSStarter(workspace: Workspace, cloud: boolean) {
         {
           name: template.name,
           description: template.description,
-          color: template.color as Color,
+          color: template.color,
           icon: template.icon,
         },
         cloud,

@@ -1529,6 +1529,83 @@ legend {
   flex: 1;
   min-width: 0;
 }
+.starter-pack-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  gap: 14px;
+  margin: 20px 0 16px;
+}
+.starter-pack-card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 19px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--surface-soft);
+  scroll-margin-top: 20px;
+}
+.starter-pack-card h3 {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  letter-spacing: -0.3px;
+}
+.starter-pack-card p {
+  color: var(--ink-soft);
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.9;
+}
+.starter-pack-count {
+  color: var(--green);
+  font-size: 11px;
+  font-weight: 600;
+  margin-top: auto;
+}
+.starter-pack-card .button {
+  font-size: 10px;
+  padding: 10px;
+  max-width: 100%;
+}
+.starter-subjects {
+  margin: 18px 0;
+}
+.starter-subject {
+  border-bottom: 1px solid var(--line);
+  padding: 12px 0;
+}
+.starter-subject summary {
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.8;
+}
+.starter-subject summary span {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 400;
+}
+.starter-subject p,
+.starter-subject li {
+  color: var(--ink-soft);
+  font-size: 11px;
+  line-height: 1.9;
+}
+.starter-subject ol {
+  padding-left: 22px;
+}
+.starter-sources {
+  display: grid;
+  gap: 12px;
+  margin: 18px 0;
+}
+#starter-packs {
+  scroll-margin-top: 20px;
+}
 .settings-card h2 {
   font-size: 16px;
   font-weight: 700;
@@ -2865,4 +2942,11 @@ legend {
     top: 32px;
     right: 17px;
   }
+}
+
+.starter-actions {
+  flex-wrap: wrap;
+}
+.starter-actions .button {
+  white-space: normal;
 }
